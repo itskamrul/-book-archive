@@ -33,7 +33,8 @@ const displayData = (books) => {
         const div = document.createElement("div");
         div.classList.add("col-md-3");
         div.innerHTML =`
-                <div class="rounded overflow-hidden border">
+                <div class="shadow rounded mt-3">
+                <div class="rounded overflow-hidden">
                 <img src='https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg' class="img-fluid  mx-auto d-block"  alt="" />
                 </div>
 
@@ -48,6 +49,7 @@ const displayData = (books) => {
                     <h3>${book.title}</h3>
                     <h5>Author Name:${book.author_name}</h5>
                     <p>First publish:${book.first_publish_year}</p>
+                </div>
                 </div>
             `;
         resultContainer.appendChild(div);
