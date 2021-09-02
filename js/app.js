@@ -2,6 +2,7 @@ const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("search-btn");
 const resultContainer = document.getElementById("result-container");
 const errorHandler = document.getElementById("error");
+const spinner = document.getElementById("spinner");
 
 searchButton.addEventListener('click', function(){
     const search = searchInput.value;
@@ -10,6 +11,7 @@ searchButton.addEventListener('click', function(){
         errorHandler.innerText = "Search field cannot be empty."
         return
     }
+    spinner.classList.remove("d-none");
     //Clear error and dom
     errorHandler.innerText = "";
     resultContainer.innerHTML = "";
@@ -21,19 +23,19 @@ searchButton.addEventListener('click', function(){
 
 const displayData = (books) => {
     if (books.numFound === 0){
-        errorHandler.innerText = "NO result fount"
+        errorHandler.innerText = "NO result found"
+        spinner.classList.add("d-none");
+        searchInput.value = "";
     }
     else{
         // Total Found
         errorHandler.innerText = `Total found: ${(books.docs).length}`
         // Loop
         books.docs.forEach((book) => {
-        console.log(book);
-
         const div = document.createElement("div");
         div.classList.add("col-md-3");
         div.innerHTML =`
-                <div class="shadow rounded mt-3">
+                <div class="shadow rounded mt-3 p-2"  style="min-height: 400px">
                 <div class="rounded overflow-hidden">
                 <img src='https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg' class="img-fluid  mx-auto d-block"  alt="" />
                 </div>
@@ -55,6 +57,7 @@ const displayData = (books) => {
         resultContainer.appendChild(div);
         //Clear Input Value
         searchInput.value = "";
+        spinner.classList.add("d-none");
     })
     };
 
